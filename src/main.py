@@ -10,9 +10,10 @@ from googletrans import Translator
 import re
 from collections import Counter
 
-BS_USERNAME = 'janvisaluja_FpS5Jj'
-BS_ACCESS_KEY = 'NNHxq5YfB18A8e6x5UYg'
+BS_USERNAME = os.getenv('BS_USERNAME')
+BS_ACCESS_KEY = os.getenv('BS_ACCESS_KEY')
 BS_HUB_URL = f'https://{BS_USERNAME}:{BS_ACCESS_KEY}@hub.browserstack.com/wd/hub'
+
 
 def get_options(tag):
     if tag == "Chrome":
