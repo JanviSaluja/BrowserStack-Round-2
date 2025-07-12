@@ -1,13 +1,20 @@
-name: Run ElPais BrowserStack Scraper
+name: BrowserStack Selenium Tests
 
-on: [push]
+on:
+  push:
+    branches: [main, master]
 
 jobs:
-  build:
+  browserstack-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      BS_USERNAME: ${{ secrets.BS_USERNAME }}
+      BS_ACCESS_KEY: ${{ secrets.BS_ACCESS_KEY }}
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -16,12 +23,21 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        python -m pip install --upgrade pip
+        pip install selenium==4.10.0 requests googletrans==4.0.0-rc1
 
-    - name: Change directory
+    - name: Run BrowserStack tests
       run: |
-        cd src
+        python src/main.py > test_output.log 2>&1
 
-    - name: Run scraper
-      run: |
-        python main.py
+    - name: Upload logs
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-log
+        path: test_output.log
+
+    - name: Upload downloaded images
+      uses: actions/upload-artifact@v3
+      with:
+        name: downloaded-images
+        path: src/images/
