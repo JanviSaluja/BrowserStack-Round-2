@@ -31,13 +31,13 @@ jobs:
         python src/main.py > test_output.log 2>&1
 
     - name: Upload logs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: test-log
         path: test_output.log
 
     - name: Upload downloaded images
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: downloaded-images
         path: src/images/
