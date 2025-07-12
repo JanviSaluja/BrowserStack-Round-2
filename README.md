@@ -54,5 +54,9 @@ The scraping is performed using Selenium WebDriver, and the tests run remotely o
     - python main.py
 2. The program will run sequentially on all the configured browsers and devices, printing output logs and saving images under the images/ directory.
 
+## Output
+
+The google drive link is attached below:
+https://drive.google.com/drive/folders/1vcMPlrWyCBA_H-mPu7FX72SjMzspE9Lk?usp=sharing
 
 
